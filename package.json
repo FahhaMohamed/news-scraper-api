@@ -1,0 +1,14 @@
+{
+  "name": "web-scrap-breaking-news",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "FAHHAM MSM",
+  "license": "ISC",
+  "description": "get the news data by web scrapping and create a rest api for show that data",
+  "dependencies": {
+    "puppeteer": "^23.9.0"
+  }
+}
