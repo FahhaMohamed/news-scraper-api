@@ -67,10 +67,11 @@ const newsScrapper = async () => {
         return brakingNewsArray;
     });
 
-    console.log(brakingNewses);
+    // console.log(brakingNewses);
     
-
     await browser.close();
+    return brakingNewses;
+
 }
 
 module.exports = newsScrapper;

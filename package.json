@@ -3,12 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon index.js",
+    "dev": "set NODE_ENV=development && npx nodemon index.js",
+    "prod": "set NODE_ENV=production && npx nodemon index.js"
   },
   "author": "FAHHAM MSM",
   "license": "ISC",
   "description": "get the news data by web scrapping and create a rest api for show that data",
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
     "puppeteer": "^23.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

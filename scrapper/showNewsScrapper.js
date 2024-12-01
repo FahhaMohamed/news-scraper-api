@@ -55,10 +55,11 @@ const showNewsScrapper = async (webUrl) => {
         return news;
     });
 
-    console.log(newsDetails);
+    // console.log(newsDetails);
     
 
     await browser.close();
+    return newsDetails;
 }
 
 module.exports = showNewsScrapper;
