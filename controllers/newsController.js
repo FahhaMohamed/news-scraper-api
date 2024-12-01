@@ -1,5 +1,6 @@
 const newsScrapper = require("../scrapper/newsScrapper");
 const showNewsScrapper = require("../scrapper/showNewsScrapper");
+const ErrorHandler = require('../utils/errorHandler');
 
 exports.getNewsList = async (req, res, next) => {
 
@@ -8,18 +9,22 @@ exports.getNewsList = async (req, res, next) => {
         res.status(200).json({
             success : true,
             message : "Successfully fetched the list of news.",
-            newses
+            newses : {
+                count : newses.length,
+                data : newses,
+            }
         });
     } catch (error) {
-        res.status(400).json({
-            success : false,
-            message : "Failed to fetch the list of news."
-        });
+        return next(new ErrorHandler('Failed to fetch news list.', 400));
     }
 }
 
 exports.showNews = async (req, res, next) => {
     const webUrl = req.query.url;
+
+    if(!webUrl) {
+        return next(new ErrorHandler('Url is required.', 400));
+    }
 
     try {
         const news = await showNewsScrapper(webUrl);
@@ -29,10 +34,7 @@ exports.showNews = async (req, res, next) => {
             news,
         });
     } catch (error) {
-        res.status(400).json({
-            status : true,
-            message : "Failed to fetch the news details.",
-        });
+        return next(new ErrorHandler('Failed to fetch news details.', 404));
     }
 
     
