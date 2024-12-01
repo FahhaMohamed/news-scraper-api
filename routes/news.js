@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.route('/newsList').get(getNewsList);
+router.route('/newsList/:paginate').get(getNewsList);
 router.route('/showNews').get(showNews);
 
 module.exports = router;

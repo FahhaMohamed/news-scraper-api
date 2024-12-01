@@ -4,6 +4,22 @@ const ErrorHandler = require('../utils/errorHandler');
 
 exports.getNewsList = async (req, res, next) => {
 
+
+    const currentPageValue = parseInt(req.params.paginate, 10) || 0;
+
+    const firstPageUrl = `${process.env.BASE_URL}/newsList`;
+    const nextPageUrl = `${process.env.BASE_URL}/newsList/${currentPageValue + 30}`;
+    var previousPageUrl;
+
+    if (currentPageValue === 30) {
+        previousPageUrl = `${process.env.BASE_URL}/newsList`;
+    } else if (currentPageValue !== 0) {
+        previousPageUrl = `${process.env.BASE_URL}/newsList/${currentPageValue - 30}`;
+    } else {
+        previousPageUrl = null;
+    }
+ 
+
     try {
         const newses = await newsScrapper();
         res.status(200).json({
@@ -12,6 +28,9 @@ exports.getNewsList = async (req, res, next) => {
             newses : {
                 count : newses.length,
                 data : newses,
+                previousPageUrl,
+                nextPageUrl,
+                firstPageUrl,
             }
         });
     } catch (error) {

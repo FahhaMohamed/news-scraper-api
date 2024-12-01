@@ -1,7 +1,11 @@
 const puppeteer = require('puppeteer');
 
-const newsScrapper = async () => {
-    const webUrl = "https://www.dailymirror.lk/breaking_news/108";
+const newsScrapper = async (newPage) => {
+    let webUrl = "https://www.dailymirror.lk/breaking_news/108";
+
+    if(newPage) {
+        webUrl = `https://www.dailymirror.lk/breaking_news/108/${newPage}`
+    }
 
     const browser = await puppeteer.launch();
 
